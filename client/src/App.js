@@ -1,31 +1,40 @@
 import React from "react";
-import { Container,AppBar,Typography,Grow,Grid } from "@mui/material";
+import { Box,Grid,Text,GridItem,Image } from "@chakra-ui/react";
+import { Stack, HStack, VStack } from '@chakra-ui/react'
 import Posts from "./components/Posts/Posts";
 import Form from "./components/Forms/Forms";
 import pexels from "./images/pexels.png";
-import useStyles from "./styles";
+
+
+
+
 const App = () => {
-    const classes = useStyles();
+   
 
     return (
-       <Container maxWidth="lg">
-              <AppBar className={classes.appBar} position="static" color="inherit">
-                <Typography className={classes.heading} variant="h2" align="center"> NFTs </Typography>
-             <img className={classes.image} src = {pexels} alt="pexels" height="200" />
-              </AppBar>
-              <Grow in>
-                <Container>
-                  <Grid container justify="space-between" alignItems="stretch" spacing={3}>
-                    <Grid item xs={12} sm={7}>
-                      <Posts />
-                    </Grid>
-                    <Grid item xs={12} sm={4}>
-                      <Form />
-                    </Grid>
-                  </Grid>
-                </Container>
-              </Grow>
-              </Container>
+       <Box w='100%' p={4} >
+     
+              <Box boxShadow='2xl' p='6'  rounded='md' bg='white'  color="inherit">
+              <HStack justifyContent="space-between">
+                <Text  fontSize="6xl" as="i" textAlign="center"> NFTs </Text>
+                <Image
+  borderRadius='full'
+  boxSize='80px'
+  src={pexels}
+  alt='pexels'
+/>
+</HStack> 
+              </Box>
+             
+            
+                <Box m={6}>
+                <Grid templateColumns='repeat(5, 1fr)' justifyContent="space-between"  align='stretch' gap={4}>
+  <GridItem colSpan={2} h='10'  > <Posts/> </GridItem>
+  <GridItem colStart={4} colEnd={6} h='10' > <Form/> </GridItem>
+</Grid>
+                </Box>
+            
+              </Box>
     );
 }
 export default App;

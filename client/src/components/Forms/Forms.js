@@ -1,8 +1,9 @@
 import React from "react";
+import { Text } from "@chakra-ui/react";
 
 const Form = () => {
     return (
-        <h1>Form</h1>
+        <Text fontSize='2xl' as='b' > Forms </Text>
     );
     }
     export default Form;
