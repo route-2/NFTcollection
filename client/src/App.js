@@ -1,40 +1,41 @@
 import React from "react";
-import { Box,Grid,Text,GridItem,Image } from "@chakra-ui/react";
-import { Stack, HStack, VStack } from '@chakra-ui/react'
+import { Box, Grid, Text, GridItem, Image } from "@chakra-ui/react";
+import { Stack, HStack, VStack } from "@chakra-ui/react";
 import Posts from "./components/Posts/Posts";
 import Form from "./components/Forms/Forms";
 import pexels from "./images/pexels.png";
 
-
-
-
 const App = () => {
-   
+  return (
+    <Box w="100%" p={4}>
+      <Box boxShadow="2xl" p="6" rounded="md" bg="white" color="inherit">
+        <HStack justifyContent="space-between">
+          <Text fontSize="6xl" as="i" textAlign="center">
+            {" "}
+            NFTs{" "}
+          </Text>
+          <Image borderRadius="full" boxSize="80px" src={pexels} alt="pexels" />
+        </HStack>
+      </Box>
 
-    return (
-       <Box w='100%' p={4} >
-     
-              <Box boxShadow='2xl' p='6'  rounded='md' bg='white'  color="inherit">
-              <HStack justifyContent="space-between">
-                <Text  fontSize="6xl" as="i" textAlign="center"> NFTs </Text>
-                <Image
-  borderRadius='full'
-  boxSize='80px'
-  src={pexels}
-  alt='pexels'
-/>
-</HStack> 
-              </Box>
-             
-            
-                <Box m={6}>
-                <Grid templateColumns='repeat(5, 1fr)' justifyContent="space-between"  align='stretch' gap={4}>
-  <GridItem colSpan={2} h='10'  > <Posts/> </GridItem>
-  <GridItem colStart={4} colEnd={6} h='10' > <Form/> </GridItem>
-</Grid>
-                </Box>
-            
-              </Box>
-    );
-}
+      <Box m={6}>
+        <Grid
+          templateColumns="repeat(5, 1fr)"
+          justifyContent="space-between"
+          align="stretch"
+          gap={4}
+        >
+          <GridItem colSpan={2} h="10">
+            {" "}
+            <Posts />{" "}
+          </GridItem>
+          <GridItem colStart={4} colEnd={6} h="10">
+            {" "}
+            <Form />{" "}
+          </GridItem>
+        </Grid>
+      </Box>
+    </Box>
+  );
+};
 export default App;
