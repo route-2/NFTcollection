@@ -13,4 +13,8 @@ import reducers from "./reducers";
 const store = createStore(reducers, compose(applyMiddleware(thunk)))
 
 ReactDOM.render(
-<ChakraProvider>  <Provider store={store}><App /> </Provider> </ChakraProvider>, document.getElementById("root"));
+<ChakraProvider> 
+ <Provider store={store}>
+ <App /> 
+ </Provider>
+  </ChakraProvider>, document.getElementById("root"));
