@@ -22,8 +22,8 @@ app.use("/posts", postRoutes); // every route starts with /posts it acts like a 
 const CONNECTION_URL = "mongodb+srv://RuthuRao:ruthusway@cluster0.xewx6wd.mongodb.net/?retryWrites=true&w=majority";
 const PORT = process.env.PORT || 5000;
 
-
+mongoose.set('strictQuery', true);
 mongoose.connect(CONNECTION_URL, { useNewUrlParser: true, useUnifiedTopology: true })
-.then(() => app.listen(PORT, () => console.log(`Server Running on Port: http://localhost:${PORT}`)))
+.then(() => app.listen(PORT, () => console.log(`Server Running on Port: http://127.0.0.1:${PORT}`)))
 .catch((error) => console.log(`${error} did not connect`));
 
