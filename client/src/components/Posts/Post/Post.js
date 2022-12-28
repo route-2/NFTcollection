@@ -1,8 +1,11 @@
 import React from 'react';
 import moment from 'moment';
 import { Card,Image,Heading,Text,Divider,Stack,ButtonGroup,  Grid, CardHeader,Button, CardBody, CardFooter } from '@chakra-ui/react'
-import Posts from '../Posts';
+
+import { useDispatch } from 'react-redux';
 const Post = ({post,setCurrentId}) => {
+    console.log(post);
+    const dispatch = useDispatch();
     return (
         <>
 

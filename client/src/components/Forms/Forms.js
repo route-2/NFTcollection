@@ -6,39 +6,56 @@ import { useDispatch, useSelector } from "react-redux";
 import { createPost, updatePost } from "../../actions/posts";
 
 const Form = ({ currentId, setCurrentId }) => {
+    const [postData, setPostData] = useState({
+        creator: '',
+        title: '',
+        message: '',
+        tags: '',
+        selectedFile: '',
+      });
+      console.log(currentId);
+ console.log(postData);
   const posts = useSelector((state) =>
-    currentId ? state.posts.find((postData) => postData.id === currentId) : null
+  
+   ( currentId ? state.posts.find((postData) => postData.id === currentId) : null)
   );
-
-  const [postData, setPostData] = useState({
-    creator: "",
-    title: "",
-    message: "",
-    tags: "",
-    selectedFile: "",
-  });
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    if (posts) setPostData(posts);
+console.log(posts);
+console.log(postData)
+useEffect(() => {
+    
+    if (posts) 
+    setPostData(posts);
   }, [posts]);
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (currentId) {
-      dispatch(updatePost(currentId, postData));
-    } else {
-      dispatch(createPost(postData));
-    }
-  };
-  const clear = () => {};
-
+ 
+ 
+console.log(currentId)
+console.log(postData)
+ 
+ 
+  const clear = () => {  setCurrentId(0);
+    setPostData({ creator: '', title: '', message: '', tags: '', selectedFile: '' })};
+   
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+      
+        if (currentId === 0) {
+            dispatch(createPost(postData));
+            clear();
+           
+          } else {
+            dispatch(updatePost(currentId, postData));
+            clear();
+          
+          }
+      };
   return (
     <div spacing={4}>
       <Text margin={4} fontSize="2xl" as="b">
         {" "}
         Create a Post{" "}
       </Text>
-      <form>
+      <form autoComplete="off" noValidate onSubmit={handleSubmit}>
         <FormControl>
           <Input
             type="text"
