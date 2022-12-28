@@ -52,8 +52,8 @@ console.log(postData)
   return (
     <div spacing={4}>
       <Text margin={4} fontSize="2xl" as="b">
-        {" "}
-        Create a Post{" "}
+        {" "} {currentId ? 'Edit a Post' : 'Create a Post' }
+       
       </Text>
       <form autoComplete="off" noValidate onSubmit={handleSubmit}>
         <FormControl>
