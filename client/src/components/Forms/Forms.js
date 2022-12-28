@@ -15,18 +15,18 @@ const Form = ({ currentId, setCurrentId }) => {
       });
       console.log(currentId);
  console.log(postData);
-  const posts = useSelector((state) =>
+  const post = useSelector((state) =>
   
    ( currentId ? state.posts.find((postData) => postData.id === currentId) : null)
   );
   const dispatch = useDispatch();
-console.log(posts);
+console.log(post);
 console.log(postData)
 useEffect(() => {
     
-    if (posts) 
-    setPostData(posts);
-  }, [posts]);
+    if (post) 
+    setPostData(post);
+  }, [post]);
  
  
 console.log(currentId)
