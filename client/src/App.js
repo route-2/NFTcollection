@@ -1,4 +1,4 @@
-import React,{useEffect} from "react";
+import React,{useEffect,useState} from "react";
 import { Box, Grid, Text, GridItem, Image } from "@chakra-ui/react";
 import { Stack, HStack, VStack } from "@chakra-ui/react";
 import Posts from "./components/Posts/Posts";
@@ -8,6 +8,7 @@ import { useDispatch } from "react-redux";
 import {getPosts} from "./actions/posts";
 
 const App = () => {
+  const [currentId, setCurrentId] = useState(null);
   const dispatch = useDispatch();
 
 
@@ -36,11 +37,11 @@ const App = () => {
         >
           <GridItem colSpan={2} h="10">
             {" "}
-            <Posts />{" "}
+            <Posts setCurrentId={setCurrentId}/>{" "}
           </GridItem>
           <GridItem colStart={4} colEnd={6} h="10">
             {" "}
-            <Form />{" "}
+            <Form currentId={currentId} setCurrentId={setCurrentId} />{" "}
           </GridItem>
         </Grid>
       </Box>

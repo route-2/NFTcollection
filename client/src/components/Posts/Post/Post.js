@@ -1,10 +1,61 @@
 import React from 'react';
-const Post = () => {
+import moment from 'moment';
+import { Card,Image,Heading,Text,Divider,Stack,ButtonGroup,  Grid, CardHeader,Button, CardBody, CardFooter } from '@chakra-ui/react'
+import Posts from '../Posts';
+const Post = ({post,setCurrentId}) => {
     return (
         <>
 
      
-        <h1>Post</h1>
+    <Grid> 
+    <Card maxW='sm'>
+  <CardBody>
+    <Image
+      src={post.selectedFile}
+      
+      borderRadius='lg'
+    />
+    <Stack mt='6' spacing='3'>
+      <Heading size='md'> {post.title}</Heading>
+      <Text>
+       {post.message}
+      </Text>
+      <Text color='blue.600' fontSize='2xl'>
+       {post.creator}
+      </Text>
+      <Text color='blue.600' fontSize='2xl'>
+      {moment(post.createdAt).fromNow()}
+      </Text>
+      <Button 
+      variant='solid' colorScheme='blue' onClick={()=> setCurrentId(post._id)}>
+       ....
+      </Button>
+      
+
+    </Stack>
+  </CardBody>
+  <Stack mt='6' ml='4' spacing='1'> 
+  <Text> {post.tags.map((tag)=>`#${tag}`)}</Text>
+  </Stack>
+  
+  <CardFooter>
+  
+  <ButtonGroup spacing='2'>
+      <Button variant='solid' colorScheme='blue' onClick={()=> {}}>
+      Like &nbsp; 
+       {post.likeCount}
+      </Button>
+      <Button variant='solid' colorScheme='blue' onClick={()=> {}}>
+     Delete
+      </Button>
+      
+    </ButtonGroup>
+   
+  </CardFooter>
+  
+ 
+</Card>
+    </Grid>
      
            </>
 

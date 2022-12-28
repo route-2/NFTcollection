@@ -4,6 +4,7 @@ import {Provider} from "react-redux"
 import { legacy_createStore as createStore, applyMiddleware, compose, combineReducers } from "redux";
 import thunk from "redux-thunk";
 import App from "./App";
+import './index.css'
 
 import {ChakraProvider} from "@chakra-ui/react"
 
