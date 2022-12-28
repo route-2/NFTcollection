@@ -17,10 +17,10 @@ const Form = ({ currentId, setCurrentId }) => {
  console.log(postData);
   const post = useSelector((state) =>
   
-   ( currentId ? state.posts.find((postData) => postData.id === currentId) : null)
+    currentId ? state.posts.find((p) => p._id === currentId) : null
   );
   const dispatch = useDispatch();
-console.log(post);
+
 console.log(postData)
 useEffect(() => {
     

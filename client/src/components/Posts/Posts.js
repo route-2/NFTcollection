@@ -3,12 +3,15 @@ import Post from "./Post/Post";
 import { Text } from '@chakra-ui/react'
 import { useSelector } from "react-redux";
 import { Card,  Grid, CardHeader, CardBody, CardFooter } from '@chakra-ui/react'
-
+import { useDispatch } from "react-redux";
 
 
 
 const Posts = ({setCurrentId}) => {
+  const dispatch = useDispatch();
   const posts = useSelector((state) => state.posts);
+ 
+
   console.log(posts);
     return (
       
