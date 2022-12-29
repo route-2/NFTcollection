@@ -14,7 +14,7 @@ const App = () => {
 
   useEffect(() => {
     dispatch(getPosts());
-  }, [dispatch]);
+  }, [currentId,dispatch]);
 
   return (
     <Box w="100%" p={4}>
