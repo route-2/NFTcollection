@@ -6,6 +6,7 @@ import Form from "./components/Forms/Forms";
 import pexels from "./images/pexels.png";
 import { useDispatch } from "react-redux";
 import {getPosts} from "./actions/posts";
+import Navbar from "./components/Navbar/Navbar";
 
 const App = () => {
   const [currentId, setCurrentId] = useState(null);
@@ -18,15 +19,7 @@ const App = () => {
 
   return (
     <Box w="100%" p={4}>
-      <Box boxShadow="2xl" p="6" rounded="md" bg="white" color="inherit">
-        <HStack justifyContent="space-between">
-          <Text fontSize="6xl" as="i" textAlign="center">
-            {" "}
-            NFTs{" "}
-          </Text>
-          <Image borderRadius="full" boxSize="80px" src={pexels} alt="pexels" />
-        </HStack>
-      </Box>
+      <Navbar/>
 
       <Box m={6}>
         <Grid
