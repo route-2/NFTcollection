@@ -1,7 +1,7 @@
 import React from 'react';
 import moment from 'moment';
 import { Card,Image,Heading,Text,Divider,Stack,ButtonGroup,  Grid, CardHeader,Button, CardBody, CardFooter } from '@chakra-ui/react'
-import { deletePost } from '../../../actions/posts';
+import { deletePost,likePost } from '../../../actions/posts';
 import { useDispatch } from 'react-redux';
 const Post = ({post,setCurrentId}) => {
 
@@ -26,7 +26,7 @@ const Post = ({post,setCurrentId}) => {
       <Text>
        {post.message}
       </Text>
-      <Text>
+      <Text fontSize={"4xl"}>
        {post.title}
       </Text>
       <Text color='blue.600' fontSize='2xl'>
@@ -50,7 +50,7 @@ const Post = ({post,setCurrentId}) => {
   <CardFooter>
   
   <ButtonGroup spacing='2'>
-      <Button variant='solid' colorScheme='blue' onClick={()=> {}}>
+      <Button variant='solid' colorScheme='blue' onClick={()=> dispatch(likePost(post._id))}>
       Like &nbsp; 
        {post.likeCount}
       </Button>

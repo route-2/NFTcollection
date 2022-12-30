@@ -98,7 +98,7 @@ console.log(postData)
             margin={4}
             placeholder="Tags"
             value={postData.tags}
-            onChange={(e) => setPostData({ ...postData, tags: e.target.value })}
+            onChange={(e) => setPostData({ ...postData, tags: e.target.value.split(',') })}
           />
         </FormControl>
 
