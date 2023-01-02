@@ -5,6 +5,8 @@ import {  Link } from 'react-router-dom'
 
 const Navbar = () => {
 
+  const user = null;
+
   return (
     <Box flex flexDirection={'row'} boxShadow="2xl" p="6" rounded="md" bg="white" color="inherit">
        <div> 
@@ -18,7 +20,26 @@ const Navbar = () => {
          
         </HStack>
         </div>
-       
+
+
+        <div>
+        <Box>
+ {user ? (
+  <>
+
+  </>
+
+ ): (
+  <>
+    
+  </>
+  )}
+
+
+
+        </Box>
+
+        </div>
 
          
             
