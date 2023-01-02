@@ -26,12 +26,18 @@ const Navbar = () => {
         <Box>
  {user ? (
   <>
+  <Box>
+  <Image borderRadius="full" boxSize="80px" src={user.result.imageUrl} alt={user.result.name} />
+  <Text >{user.result.name}</Text> 
+  <Button >Logout  </Button>
+         
+  </Box>
 
   </>
 
  ): (
   <>
-    
+  <Button  component={Link} to ='/auth'> Sign in  </Button>
   </>
   )}
 
