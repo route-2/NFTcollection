@@ -1,6 +1,6 @@
 import React from 'react'
 import { Box, Grid, Text,Button, GridItem, Image } from "@chakra-ui/react";
-import { Stack, HStack, VStack } from "@chakra-ui/react";
+
 import Posts from '../Posts/Posts';
 import Form from '../Forms/Forms';
 import { useState,useEffect } from 'react';
@@ -12,9 +12,9 @@ import { getPosts } from '../../actions/posts';
 
 
 const Home = () => {
-    const [currentId, setCurrentId] = useState(null);
+    const [currentId, setCurrentId] = useState(0);
     const dispatch = useDispatch();
-  
+ 
   
     useEffect(() => {
       dispatch(getPosts());

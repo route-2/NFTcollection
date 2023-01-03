@@ -1,17 +1,19 @@
 import PostMessage from '../models/postMessage.js'
 import mongoose from 'mongoose';
 
+
 export const getPosts = async (req,res) => {
     try { 
         const postMessages = await PostMessage.find();
-        console.log(postMessages);
+      
         res.status(200).json(postMessages);
     }
     catch (error) { 
 
-        res.status(404).json({ message: error.message });
+        res.status(404).json({ message: error });
     }
 }
+
 
 export const createPost = async (req,res) => {
     
