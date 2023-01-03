@@ -7,37 +7,23 @@ import pexels from "./images/pexels.png";
 import { useDispatch } from "react-redux";
 import {getPosts} from "./actions/posts";
 import Navbar from "./components/Navbar/Navbar";
+import { BrowserRouter,Routes,Route } from "react-router-dom";
+import Home from "./components/Home/Home";
 
 const App = () => {
-  const [currentId, setCurrentId] = useState(null);
-  const dispatch = useDispatch();
-
-
-  useEffect(() => {
-    dispatch(getPosts());
-  }, [currentId,dispatch]);
-
+ 
   return (
     <Box w="100%" p={4}>
       <Navbar/>
+      <BrowserRouter>
+      <Routes>
+        <Route path="/" exact component={Home} />
+        <Route path="/auth" exact component={() => <h1>Auth</h1>} />
+      </Routes>
+      </BrowserRouter>
 
-      <Box m={6}>
-        <Grid
-          templateColumns="repeat(5, 1fr)"
-          justifyContent="space-between"
-          align="stretch"
-          gap={4}
-        >
-          <GridItem colSpan={2} h="10">
-            {" "}
-            <Posts setCurrentId={setCurrentId}/>{" "}
-          </GridItem>
-          <GridItem colStart={4} colEnd={6} h="10">
-            {" "}
-            <Form currentId={currentId} setCurrentId={setCurrentId} />{" "}
-          </GridItem>
-        </Grid>
-      </Box>
+
+     
     </Box>
   );
 };

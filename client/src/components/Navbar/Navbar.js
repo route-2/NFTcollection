@@ -1,7 +1,8 @@
 import React from 'react'
-import { Box, HStack, Text, Image } from '@chakra-ui/react'
+import { Box, HStack, Text, Image,Button } from '@chakra-ui/react'
 import pexels from '../../images/pexels.png'
 import {  Link } from 'react-router-dom'
+
 
 const Navbar = () => {
 
