@@ -5,6 +5,8 @@ import { Stack, HStack, VStack } from "@chakra-ui/react";
 import Navbar from "./components/Navbar/Navbar";
 import { BrowserRouter,Routes,Route } from "react-router-dom";
 import Home from "./components/Home/Home";
+import Auth from "./components/Auth/Auth";
+import SignUp from "./components/Auth/SignUp";
 
 const App = () => {
  
@@ -14,7 +16,8 @@ const App = () => {
       <BrowserRouter>
       <Routes>
         <Route path="/"  element={<Home/>} />
-        <Route path="/auth" exact element={() => <h1>Auth</h1>} />
+        <Route path="/auth"  element={<Auth/>} />
+        <Route path="/signup"  element={<SignUp/>} />
       </Routes>
       </BrowserRouter>
 

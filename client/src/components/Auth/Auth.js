@@ -1,124 +1,130 @@
 import React from 'react'
 import {
   Flex,
-  Box,
-  FormControl,
-  FormLabel,
-  Input,
-  Checkbox,
-  Stack,
-  Link,
-  Button,
   Heading,
-  Text,
-  useColorModeValue,
-  Container,
+  Input,
+  Button,
+  InputGroup,
+  Stack,
+  InputLeftElement,
+  chakra,
+  Box,
+ Text,
+
+  Avatar,
+  FormControl,
+  FormHelperText,
+  InputRightElement
 } from '@chakra-ui/react';
+import NextLink from 'next/link'
+import { Link } from '@chakra-ui/react'
+import SignUp from './SignUp';
+import { useState } from "react";
+import { FaUserAlt, FaLock } from "react-icons/fa";
+
+const CFaUserAlt = chakra(FaUserAlt);
+const CFaLock = chakra(FaLock);
+
 
 
 
 const Auth = () => {
 
+  const [showPassword, setShowPassword] = useState(false);
+
+  const handleShowClick = () => setShowPassword(!showPassword);
   const handleSubmit = (e) => {
     e.preventDefault();
   };
+  const handleChange = (e) => {
+    e.preventDefault();
+  };
 
-  const handleChange = () => {};
-  const isSignup = false;
-    const state = null;
+  const isSignup = true;
   return (
     <Flex
-      minH={'100vh'}
-      align={'center'}
-      justify={'center'}
-      bg={useColorModeValue('gray.50', 'gray.800')}>
-      <Stack spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6}>
-        <Stack align={'center'}>
-          <Heading fontSize={'4xl'}>Sign in to your account</Heading>
-         
-        </Stack>
-        <Box
-          rounded={'lg'}
-          bg={useColorModeValue('white', 'gray.700')}
-          boxShadow={'lg'}
-          p={8}>
-          <Stack spacing={4}>
-          <form onSubmit={handleSubmit}>
-          
-          <Grid container spacing={2}>
-{
-  isSignup && (
-    <>
-      <Grid item xs={12} sm={6}>
-      <FormControl id="email">
-              <FormLabel>Email address</FormLabel>
-              <Input type="email" />
-            </FormControl>
-            <FormControl id="password">
-              <FormLabel>Password</FormLabel>
-              <Input type="password" />
-            </FormControl>
-            <FormControl id="confirmPassword">
-              <FormLabel>Confirm Password</FormLabel>
-              <Input type="password" />
-            </FormControl>
-      </Grid>
-      <Grid item xs={12} sm={6}>
-      <FormControl id="firstName">
-              <FormLabel handleChange={handleChange} >First Name</FormLabel>
-              <Input type="text" />
-            </FormControl>
-            <FormControl id="lastName">
-              <FormLabel>Last Name</FormLabel>
-              <Input type="text" />
-            </FormControl>
-      </Grid>
-      </>
-  )
-}
+    flexDirection="column"
+    width="100wh"
+   
+    backgroundColor="whiteAlpha.900"
+    justifyContent="center"
+    alignItems="center"
+  >
+    <Stack
+      flexDir="column"
+      mb="2"
+      justifyContent="center"
+      alignItems="center"
+    >
+      <Avatar bg="blue.400" />
+      <Heading color="blue.200">Welcome</Heading>
+      <Box minW={{ base: "90%", md: "468px" }}>
+    
+        <form onSubmit={handleSubmit}>
 
-
-
-
-          </Grid>
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-           </form>
-            
-            <Stack spacing={10}>
-              <Stack
-                direction={{ base: 'column', sm: 'row' }}
-                align={'start'}
-                justify={'space-between'}>
-                <Checkbox>Remember me</Checkbox>
-                <Link color={'blue.400'}>Forgot password?</Link>
-              </Stack>
-              <Button
-                bg={'blue.400'}
-                color={'white'}
-                _hover={{
-                  bg: 'blue.500',
-                }}>
-                Sign in
-              </Button>
-              
-            </Stack>
-            
+        {
+          isSignup && ( 
+            <> 
+            <Stack
+            spacing={4}
+            p="1rem"
+            backgroundColor="whiteAlpha.900"
+            boxShadow="md"
+          >
+            <FormControl>
+              <InputGroup>
+                <InputLeftElement
+                  pointerEvents="none"
+                  children={<CFaUserAlt color="gray.300" />}
+                />
+                <Input type="email" placeholder="email address" />
+              </InputGroup>
+            </FormControl>
+            <FormControl>
+              <InputGroup>
+                <InputLeftElement
+                  pointerEvents="none"
+                  color="gray.300"
+                  children={<CFaLock color="gray.300" />}
+                />
+                <Input
+                  type={showPassword ? "text" : "password"}
+                  placeholder="Password"
+                />
+                <InputRightElement width="4.5rem">
+                  <Button h="1.75rem" size="sm" onClick={handleShowClick}>
+                    {showPassword ? "Hide" : "Show"}
+                  </Button>
+                </InputRightElement>
+              </InputGroup>
+              <FormHelperText textAlign="right">
+                <Text>forgot password?</Text>
+              </FormHelperText>
+            </FormControl>
+            <Button
+              borderRadius={0}
+              type="submit"
+              variant="solid"
+              colorScheme="blue"
+              width="full"
+            >
+              Login
+            </Button>
           </Stack>
-        </Box>
-      </Stack>
-    </Flex>
+            </>
+          )
+        }
+          
+        </form>
+      </Box>
+    </Stack>
+    <Box>
+      New to us?{" "}
+      <Link color="blue.500" as={NextLink} href='/SignUp' >
+        Sign Up
+      </Link>
+    </Box>
+  </Flex>
   )
 }
 
