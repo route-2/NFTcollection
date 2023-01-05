@@ -6,7 +6,6 @@ import { Card, Grid, CardHeader, CardBody, CardFooter } from "@chakra-ui/react";
 import { useDispatch } from "react-redux";
 
 const Posts = ({ setCurrentId }) => {
-
   const posts = useSelector((state) => state.posts);
 
   console.log(posts);
