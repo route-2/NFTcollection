@@ -95,7 +95,20 @@ export default function SignupCard() {
                 )}
               </InputGroup>
             </FormControl>
-            <GoogleLogin />
+            <GoogleLogin 
+            clientId="Id"
+            render={(renderProps) => (
+              <>
+              <Button onClick={renderProps.onClick} disables={renderProps.disabled} > </Button>
+
+              </>
+            )}
+
+
+
+
+
+            />
             <Stack spacing={10} pt={2}>
               <Button
                 loadingText="Submitting"
