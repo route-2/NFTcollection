@@ -99,7 +99,10 @@ export default function SignupCard() {
             clientId="Id"
             render={(renderProps) => (
               <>
-              <Button onClick={renderProps.onClick} disables={renderProps.disabled} > </Button>
+              <Button onClick={renderProps.onClick}
+               disabled={renderProps.disabled} 
+               color={"white"}
+               variant={"outline"} > Google SignIn </Button>
 
               </>
             )}

@@ -20,6 +20,7 @@ import { Link } from "@chakra-ui/react";
 import SignUp from "./SignUp";
 import { useState } from "react";
 import { FaUserAlt, FaLock } from "react-icons/fa";
+import { GoogleLogin } from "react-google-login";
 
 const CFaUserAlt = chakra(FaUserAlt);
 const CFaLock = chakra(FaLock);
