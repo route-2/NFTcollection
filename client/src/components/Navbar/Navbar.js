@@ -3,11 +3,24 @@ import { Box, Flex, Stack, Text, Image, Button } from "@chakra-ui/react";
 import pexels from "../../images/pexels.png";
 import NextLink from "next/link";
 import { Link } from "@chakra-ui/react";
+import { useState,useEffect } from "react";
 
 import Auth from "../Auth/Auth";
 
 const Navbar = () => {
-  const user = null;
+
+  
+  const handleLogout = () => {
+    localStorage.clear();
+    window.location.reload();
+
+  };
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
+  useEffect(() => {
+    const token = user?.token;
+    setUser(JSON.parse(localStorage.getItem("profile")));
+
+  }, [user?.token]);
 
   return (
     <Box boxShadow="2xl" p="6" rounded="md" bg="white" color="inherit">
@@ -42,7 +55,7 @@ const Navbar = () => {
                   alt={user.result.name}
                 />
                 <Text>{user.result.name}</Text>
-                <Button>Logout </Button>
+                <Button onClick={handleLogout} >Logout </Button>
               </Box>
             </>
           ) : (

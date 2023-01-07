@@ -15,6 +15,8 @@ import {
 } from "@chakra-ui/react";
 import NextLink from "next/link";
 import { Link } from "@chakra-ui/react";
+import {useNavigate} from 'react-router-dom'
+import {useDispatch} from 'react-redux'
 import { useState } from "react";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import { GoogleLogin } from "react-google-login";
@@ -22,6 +24,8 @@ import { gapi } from "gapi-script";
 import { useEffect } from "react";
 
 export default function SignupCard() {
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
   const handleChange = (e) => {
     e.preventDefault();
   };
@@ -31,6 +35,25 @@ export default function SignupCard() {
   const googleSuccess = async (res) => {
     const result = res?.profileObj;
     const token = res?.tokenId;
+
+try {
+  dispatch({type: 'AUTH', data: {result, token}})
+
+
+  navigate('/')
+  
+
+  
+} catch (error) {
+  console.log(error)
+  
+}
+
+
+
+
+
+
     console.log(result);
   };
   const googleFailure = async (error) => {
@@ -38,7 +61,8 @@ export default function SignupCard() {
     
     console.log(error)
   };
-  const clientId = process.env.GOOGLE_API_TOKEN
+  
+  const MY_CLIENT_ID = process.env.GOOGLE_API_TOKEN
   useEffect(() => { const clientId = process.env.GOOGLE_API_TOKEN; function start() { gapi.client.init({ clientId: process.env.GOOGLE_API_TOKEN, scope: "", }); } gapi.load("client:auth2", start); });
  
 
@@ -112,7 +136,7 @@ export default function SignupCard() {
               </InputGroup>
             </FormControl>
             <GoogleLogin 
-            clientId={clientId}
+            clientId={MY_CLIENT_ID}
             render={(renderProps) => (
               <>
               <Button onClick={renderProps.onClick}

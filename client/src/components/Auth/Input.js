@@ -23,8 +23,9 @@ const Input = ({ half }) => {
                   </IconButton>
                 </InputAdornment>
               ),
-            }
+            } 
           }
+          
         />
       </Grid>
     </>
