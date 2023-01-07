@@ -30,10 +30,12 @@ export default function SignupCard() {
     const result = res?.profileObj;
     const token = res?.tokenId;
   };
-  const googleFailure = async (res) => {
+  const googleFailure = async (error) => {
     console.log("Google Sign In was unsuccessful. Try again later");
-    console.log(res);
+    
+    console.log(error)
   };
+  googleFailure();
 
   return (
     <Flex
@@ -118,6 +120,8 @@ export default function SignupCard() {
             onSuccess={googleSuccess}
             onFailure={googleFailure}
             cookiePolicy="single_host_origin"
+           
+            
 
 
 
