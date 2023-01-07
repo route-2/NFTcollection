@@ -26,6 +26,15 @@ export default function SignupCard() {
   const isSignUp = true;
   const [showPassword, setShowPassword] = useState(false);
 
+  const googleSuccess = async (res) => {
+    const result = res?.profileObj;
+    const token = res?.tokenId;
+  };
+  const googleFailure = async (res) => {
+    console.log("Google Sign In was unsuccessful. Try again later");
+    console.log(res);
+  };
+
   return (
     <Flex
       minH={"100vh"}
@@ -96,16 +105,19 @@ export default function SignupCard() {
               </InputGroup>
             </FormControl>
             <GoogleLogin 
-            clientId="Id"
+            clientId="836145811302-9tbg2ia268mk7vguof3e8i40nj58clhs.apps.googleusercontent.com"
             render={(renderProps) => (
               <>
               <Button onClick={renderProps.onClick}
                disabled={renderProps.disabled} 
-               color={"white"}
-               variant={"outline"} > Google SignIn </Button>
+               backgroundColor={"blue.200"}
+               variant={"outline"} > Google Sign-In </Button>
 
               </>
             )}
+            onSuccess={googleSuccess}
+            onFailure={googleFailure}
+            cookiePolicy="single_host_origin"
 
 
 
