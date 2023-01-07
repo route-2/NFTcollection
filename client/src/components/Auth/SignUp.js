@@ -18,6 +18,8 @@ import { Link } from "@chakra-ui/react";
 import { useState } from "react";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import { GoogleLogin } from "react-google-login";
+import { gapi } from "gapi-script";
+import { useEffect } from "react";
 
 export default function SignupCard() {
   const handleChange = (e) => {
@@ -29,13 +31,16 @@ export default function SignupCard() {
   const googleSuccess = async (res) => {
     const result = res?.profileObj;
     const token = res?.tokenId;
+    console.log(result);
   };
   const googleFailure = async (error) => {
     console.log("Google Sign In was unsuccessful. Try again later");
     
     console.log(error)
   };
-  googleFailure();
+  const clientId = process.env.GOOGLE_API_TOKEN
+  useEffect(() => { const clientId = process.env.GOOGLE_API_TOKEN; function start() { gapi.client.init({ clientId: process.env.GOOGLE_API_TOKEN, scope: "", }); } gapi.load("client:auth2", start); });
+ 
 
   return (
     <Flex
@@ -107,7 +112,7 @@ export default function SignupCard() {
               </InputGroup>
             </FormControl>
             <GoogleLogin 
-            clientId="836145811302-9tbg2ia268mk7vguof3e8i40nj58clhs.apps.googleusercontent.com"
+            clientId={clientId}
             render={(renderProps) => (
               <>
               <Button onClick={renderProps.onClick}
