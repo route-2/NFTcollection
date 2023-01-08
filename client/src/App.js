@@ -11,8 +11,9 @@ import SignUp from "./components/Auth/SignUp";
 const App = () => {
   return (
     <Box w="100%" p={4}>
-      <Navbar />
+      
       <BrowserRouter>
+      <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/auth" element={<Auth />} />

@@ -4,12 +4,13 @@ import pexels from "../../images/pexels.png";
 import NextLink from "next/link";
 import { Link } from "@chakra-ui/react";
 import { useState,useEffect } from "react";
+import { useLocation } from "react-router-dom";
 
 import Auth from "../Auth/Auth";
 
 const Navbar = () => {
 
-  
+  const location = useLocation()
   const handleLogout = () => {
     localStorage.clear();
     window.location.reload();
@@ -20,7 +21,7 @@ const Navbar = () => {
     const token = user?.token;
     setUser(JSON.parse(localStorage.getItem("profile")));
 
-  }, [user?.token]);
+  }, [location]);
 
   return (
     <Box boxShadow="2xl" p="6" rounded="md" bg="white" color="inherit">

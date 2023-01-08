@@ -17,6 +17,7 @@ import NextLink from "next/link";
 import { Link } from "@chakra-ui/react";
 
 import {useNavigate} from 'react-router-dom'
+import { useLocation } from "react-router-dom";
 import {useDispatch} from 'react-redux'
 import { useState } from "react";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
@@ -30,6 +31,7 @@ export default function SignupCard() {
   
   const navigate = useNavigate()
   const dispatch = useDispatch()
+  
   const handleChange = (e) => {
     e.preventDefault();
   };

@@ -21,19 +21,38 @@ import SignUp from "./SignUp";
 import { useState } from "react";
 import { FaUserAlt, FaLock } from "react-icons/fa";
 import { GoogleLogin } from "react-google-login";
+import { useDispatch } from "react-redux";
+import { signIn, signUp } from "../../actions/auth";
+import { useNavigate } from "react-router-dom";
 
 const CFaUserAlt = chakra(FaUserAlt);
 const CFaLock = chakra(FaLock);
 
 const Auth = () => {
+  const history = useNavigate()
+  const dispatch = useDispatch();
   const [isSignup, setIsSignup] = useState(true);
   const [showPassword, setShowPassword] = useState(false);
-
+  const[formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    password: '',
+    confirmPassword: ''
+  });
   const handleShowClick = () => setShowPassword(!showPassword);
   const handleSubmit = (e) => {
+         
+    if(isSignup){ 
+     dispatch(signUp(formData, history))
+    }else{
+      dispatch(signIn(formData, history))
+    }
+
     e.preventDefault();
   };
   const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value }); 
     e.preventDefault();
   };
 
