@@ -15,6 +15,7 @@ import {
 } from "@chakra-ui/react";
 import NextLink from "next/link";
 import { Link } from "@chakra-ui/react";
+
 import {useNavigate} from 'react-router-dom'
 import {useDispatch} from 'react-redux'
 import { useState } from "react";
@@ -23,7 +24,10 @@ import { GoogleLogin } from "react-google-login";
 import { gapi } from "gapi-script";
 import { useEffect } from "react";
 
+
+
 export default function SignupCard() {
+  
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const handleChange = (e) => {
@@ -62,9 +66,9 @@ try {
     console.log(error)
   };
   
-  const MY_CLIENT_ID = process.env.GOOGLE_API_TOKEN
-  useEffect(() => { const clientId = process.env.GOOGLE_API_TOKEN; function start() { gapi.client.init({ clientId: process.env.GOOGLE_API_TOKEN, scope: "", }); } gapi.load("client:auth2", start); });
- 
+  const MY_CLIENT_ID = "836145811302-9tbg2ia268mk7vguof3e8i40nj58clhs.apps.googleusercontent.com"
+  useEffect(() => { const clientId = process.env.REACT_APP_GOOGLE_API_TOKEN; function start() { gapi.client.init({ clientId: process.env.GOOGLE_API_TOKEN, scope: "", }); } gapi.load("client:auth2", start); });
+ console.log(MY_CLIENT_ID)
 
   return (
     <Flex
