@@ -24,17 +24,19 @@ import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import { GoogleLogin } from "react-google-login";
 import { gapi } from "gapi-script";
 import { useEffect } from "react";
+import {signUp,signIn} from '../../actions/auth'
 
 
 
 export default function SignupCard() {
-  
+  const initialState = { firstName: '', lastName: '', email: '', password: '', confirmPassword: '' };
   const navigate = useNavigate()
   const dispatch = useDispatch()
+  const [form, setForm] = useState(initialState);
+  const [isSignup, setIsSignup] = useState(false);
   
-  const handleChange = (e) => {
-    e.preventDefault();
-  };
+  const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
+
   const isSignUp = true;
   const [showPassword, setShowPassword] = useState(false);
 
@@ -62,6 +64,23 @@ try {
 
     console.log(result);
   };
+  
+  const switchMode = () => {
+    setForm(initialState);
+    setIsSignup((prevIsSignup) => !prevIsSignup);
+    setShowPassword(false);
+  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (isSignup) {
+      dispatch(signUp(form, navigate));
+    } else {
+      dispatch(signIn(form, navigate));
+    }
+  };
+
+
   const googleFailure = async (error) => {
     console.log("Google Sign In was unsuccessful. Try again later");
     
@@ -95,32 +114,37 @@ try {
           p={8}
         >
           <Stack spacing={4}>
+          <form onSubmit={handleSubmit}> 
+          { isSignUp && (
+
+      
             <HStack>
               <Box>
                 <FormControl
                   id="firstName"
                   isRequired
-                  handleChange={handleChange}
+                  
                 >
                   <FormLabel>First Name</FormLabel>
-                  <Input type="text" />
+                  <Input handleChange={handleChange} type="text" />
                 </FormControl>
               </Box>
               <Box>
-                <FormControl id="lastName" handleChange={handleChange}>
+                <FormControl id="lastName"  >
                   <FormLabel>Last Name</FormLabel>
-                  <Input type="text" />
+                  <Input handleChange={handleChange} type="text" />
                 </FormControl>
               </Box>
             </HStack>
+            )};
             <FormControl id="email" isRequired>
               <FormLabel>Email address</FormLabel>
-              <Input type="email" />
+              <Input handleChange={handleChange} type="email" />
             </FormControl>
             <FormControl id="password" isRequired>
               <FormLabel>Password</FormLabel>
               <InputGroup>
-                <Input type={showPassword ? "text" : "password"} />
+                <Input handleChange={handleChange} type={showPassword ? "text" : "password"} />
                 <InputRightElement h={"full"}>
                   <Button
                     variant={"ghost"}
@@ -169,6 +193,8 @@ try {
                 size="lg"
                 bg={"blue.400"}
                 color={"white"}
+                type="submit"
+                
                 _hover={{
                   bg: "blue.500",
                 }}
@@ -180,10 +206,14 @@ try {
               <Text align={"center"}>
                 Already a user?{" "}
                 <Link color={"blue.400"} as={NextLink} href="/Auth">
+                 <Button onClick={switchMode}> 
                   Login
+                  </Button>
                 </Link>
               </Text>
             </Stack>
+            </form>
+            
           </Stack>
         </Box>
       </Stack>

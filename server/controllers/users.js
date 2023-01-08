@@ -1,4 +1,4 @@
-import AuthDetail from "../models/userDetails";
+import AuthDetail from "../models/userDetails.js";
 import bcrypt from "bcryptjs"; //hashes the password
 import jwt from "jsonwebtoken"; // creates a token
 import dotenv from "dotenv";
@@ -56,7 +56,7 @@ export const signUp = async (req, res) => {
         const token = jwt.sign({email: result.email, id: result._id}, 'test' , {expiresIn: "1h"});
         
         res.status(200).json({result, token}); // send the token to the client 
-        
+
 
     }
     catch (err) {

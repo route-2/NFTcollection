@@ -4,8 +4,8 @@ import auth from "../middleware/auth.js";
 
 const router = express.Router();
 
-router.post("/signin", signIn);
-router.post("/signup", signUp);
-router.get("/", auth, (req, res) => {
-  res.send(`Hello ${req.userId}`);
-});
+router.post("/signIn", signIn);
+router.post("/signUp", signUp);
+
+
+export default router
