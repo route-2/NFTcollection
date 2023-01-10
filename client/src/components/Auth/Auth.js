@@ -22,14 +22,14 @@ import { useState } from "react";
 import { FaUserAlt, FaLock } from "react-icons/fa";
 import { GoogleLogin } from "react-google-login";
 import { useDispatch } from "react-redux";
-import { signIn, signUp } from "../../actions/auth";
+import { signin, signup } from "../../actions/auth";
 import { useNavigate } from "react-router-dom";
 
 const CFaUserAlt = chakra(FaUserAlt);
 const CFaLock = chakra(FaLock);
 
 const Auth = () => {
-  const history = useNavigate()
+  const navigate = useNavigate()
   const dispatch = useDispatch();
   const [isSignup, setIsSignup] = useState(true);
   const [showPassword, setShowPassword] = useState(false);
@@ -42,14 +42,14 @@ const Auth = () => {
   });
   const handleShowClick = () => setShowPassword(!showPassword);
   const handleSubmit = (e) => {
-         
+    e.preventDefault();
     if(isSignup){ 
-     dispatch(signUp(formData, history))
+     dispatch(signup(formData, navigate))
     }else{
-      dispatch(signIn(formData, history))
+      dispatch(signin(formData, navigate))
     }
 
-    e.preventDefault();
+   
   };
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value }); 
@@ -57,6 +57,14 @@ const Auth = () => {
   };
 
   const switchMode = () => {
+    setFormData({ ...formData,
+      firstName: '',
+      lastName: '',
+      email: '',
+    password: '',
+    confirmPassword: '',
+    });
+
     setIsSignup((prevIsSignup) => !prevIsSignup);
     setShowPassword(false);
   };
@@ -93,7 +101,7 @@ const Auth = () => {
                         pointerEvents="none"
                         children={<CFaUserAlt color="gray.300" />}
                       />
-                      <Input type="email" placeholder="email address" />
+                      <Input type="email" handleChange={handleChange}  placeholder="email address" />
                     </InputGroup>
                   </FormControl>
                   <FormControl>
@@ -105,7 +113,7 @@ const Auth = () => {
                       />
                       <Input
                         type={showPassword ? "text" : "password"}
-                        placeholder="Password"
+                        placeholder="Password" handleChange={handleChange}
                       />
                       <InputRightElement width="4.5rem">
                         <Button h="1.75rem" size="sm" onClick={handleShowClick}>

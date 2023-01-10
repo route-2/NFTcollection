@@ -1,13 +1,13 @@
-import AuthDetail from "../models/userDetails.js";
+import User from '../models/user.js';
 import bcrypt from "bcryptjs"; //hashes the password
 import jwt from "jsonwebtoken"; // creates a token
 import dotenv from "dotenv";
 dotenv.config();
 
-export const signIn = async (req, res) => {
+export const signin = async (req, res) => {
     const {email,password} = req.body;
     try {
-        const existingUser = await AuthDetail.findOne({email: email});
+        const existingUser = await User.findOne({ email});
 
         if(!existingUser) {
             return res.status(404).json({message: "User doesn't exist"});
@@ -33,12 +33,12 @@ export const signIn = async (req, res) => {
     
 }
 
-export const signUp = async (req, res) => {
+export const signup = async (req, res) => {
 
     const {email,password,confirmPassword,firstName,lastName} = req.body;
 
     try {
-        const existingUser = await AuthDetail.findOne({email: email});
+        const existingUser = await User.findOne({email: email});
 
         if(existingUser) {
             return res.status(400).json({message: "User already exists"});
@@ -50,7 +50,7 @@ export const signUp = async (req, res) => {
 
         const hashedPassword = await bcrypt.hash(password, 12);
          // create a user account
-        const result = await AuthDetail.create({email, password: hashedPassword, name: `${firstName} ${lastName}`});
+        const result = await User.create({email, password: hashedPassword, name: `${firstName} ${lastName}`});
         // create a token
 
         const token = jwt.sign({email: result.email, id: result._id}, 'test' , {expiresIn: "1h"});

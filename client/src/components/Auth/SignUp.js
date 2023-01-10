@@ -1,3 +1,4 @@
+import React from "react";
 import {
   Flex,
   Box,
@@ -24,7 +25,8 @@ import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import { GoogleLogin } from "react-google-login";
 import { gapi } from "gapi-script";
 import { useEffect } from "react";
-import {signUp,signIn} from '../../actions/auth'
+import {signup,signin} from '../../actions/auth'
+
 
 
 
@@ -74,9 +76,10 @@ try {
     e.preventDefault();
 
     if (isSignup) {
-      dispatch(signUp(form, navigate));
+      dispatch(signup(form, navigate));
+      
     } else {
-      dispatch(signIn(form, navigate));
+      dispatch(signin(form, navigate));
     }
   };
 

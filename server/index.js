@@ -3,7 +3,7 @@ import bodyParser from "body-parser";
 import mongoose from "mongoose";
 import cors from "cors";
 import postRoutes from "./routes/posts.js";
-import userRoutes from "./routes/users.js";
+import userRoutes from "./routes/user.js";
 import dotenv from "dotenv";
 const app = express();
 dotenv.config();
@@ -11,7 +11,7 @@ app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 app.use(cors());
 app.use("/posts", postRoutes); // every route starts with /posts it acts like a prefix
-app.use('/users', userRoutes); // every route starts with /users
+app.use('/user', userRoutes); // every route starts with /users
 
 
 
