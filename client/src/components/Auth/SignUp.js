@@ -29,41 +29,40 @@ import {signup,signin} from '../../actions/auth'
 
 
 
+const initialState = { firstName: '', lastName: '', email: '', password: '', confirmPassword: '' };
 
 export default function SignupCard() {
-  const initialState = { firstName: '', lastName: '', email: '', password: '', confirmPassword: '' };
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const [form, setForm] = useState(initialState);
   const [isSignup, setIsSignup] = useState(false);
   
-  const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
-
+  
   const isSignUp = true;
   const [showPassword, setShowPassword] = useState(false);
-
+  
   const googleSuccess = async (res) => {
     const result = res?.profileObj;
     const token = res?.tokenId;
-
-try {
-  dispatch({type: 'AUTH', data: {result, token}})
-
-
-  navigate('/')
-  
-
-  
-} catch (error) {
-  console.log(error)
-  
-}
-
-
-
-
-
-
+    
+    try {
+      dispatch({type: 'AUTH', data: {result, token}})
+      
+      
+      navigate('/')
+      
+      
+      
+    } catch (error) {
+      console.log(error)
+      
+    }
+    
+    
+    
+    
+    
+    
     console.log(result);
   };
   
@@ -74,16 +73,18 @@ try {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    if (isSignup) {
+    
+    if (isSignUp) {
+      console.log(form)
       dispatch(signup(form, navigate));
       
     } else {
+      
       dispatch(signin(form, navigate));
     }
   };
-
-
+  
+  
   const googleFailure = async (error) => {
     console.log("Google Sign In was unsuccessful. Try again later");
     
@@ -92,11 +93,12 @@ try {
   
   const MY_CLIENT_ID = "836145811302-9tbg2ia268mk7vguof3e8i40nj58clhs.apps.googleusercontent.com"
   useEffect(() => { const clientId = process.env.REACT_APP_GOOGLE_API_TOKEN; function start() { gapi.client.init({ clientId: process.env.GOOGLE_API_TOKEN, scope: "", }); } gapi.load("client:auth2", start); });
- console.log(MY_CLIENT_ID)
-
+  console.log(MY_CLIENT_ID)
+  const handleChange = (e) => setForm({ ...form, [e.target.id]: e.target.value });
+  
   return (
     <Flex
-      minH={"100vh"}
+    minH={"100vh"}
       align={"center"}
       justify={"center"}
       bg={useColorModeValue("gray.50", "gray.800")}
@@ -120,8 +122,9 @@ try {
           <form onSubmit={handleSubmit}> 
           { isSignUp && (
 
-      
+            
             <HStack>
+              
               <Box>
                 <FormControl
                   id="firstName"
@@ -129,25 +132,25 @@ try {
                   
                 >
                   <FormLabel>First Name</FormLabel>
-                  <Input handleChange={handleChange} type="text" />
+                  <Input onChange={handleChange} type="text" />
                 </FormControl>
               </Box>
               <Box>
                 <FormControl id="lastName"  >
                   <FormLabel>Last Name</FormLabel>
-                  <Input handleChange={handleChange} type="text" />
+                  <Input onChange={handleChange} type="text" />
                 </FormControl>
               </Box>
             </HStack>
             )};
             <FormControl id="email" isRequired>
               <FormLabel>Email address</FormLabel>
-              <Input handleChange={handleChange} type="email" />
+              <Input onChange={handleChange} type="email" />
             </FormControl>
             <FormControl id="password" isRequired>
               <FormLabel>Password</FormLabel>
               <InputGroup>
-                <Input handleChange={handleChange} type={showPassword ? "text" : "password"} />
+                <Input onChange={handleChange} type={showPassword ? "text" : "password"} />
                 <InputRightElement h={"full"}>
                   <Button
                     variant={"ghost"}
@@ -160,10 +163,11 @@ try {
                 </InputRightElement>
                 {isSignUp && (
                   <Input
+                    id="confirmPassword"
                     name=" confirm password"
                     type="password"
                     placeholder=" Repeat Password"
-                    handleChange={handleChange}
+                    onChange={handleChange}
                   />
                 )}
               </InputGroup>

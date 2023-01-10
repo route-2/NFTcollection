@@ -101,7 +101,7 @@ const Auth = () => {
                         pointerEvents="none"
                         children={<CFaUserAlt color="gray.300" />}
                       />
-                      <Input type="email" handleChange={handleChange}  placeholder="email address" />
+                      <Input type="email" onChange={handleChange}  placeholder="email address" />
                     </InputGroup>
                   </FormControl>
                   <FormControl>
@@ -113,7 +113,7 @@ const Auth = () => {
                       />
                       <Input
                         type={showPassword ? "text" : "password"}
-                        placeholder="Password" handleChange={handleChange}
+                        placeholder="Password" onChange={handleChange}
                       />
                       <InputRightElement width="4.5rem">
                         <Button h="1.75rem" size="sm" onClick={handleShowClick}>
