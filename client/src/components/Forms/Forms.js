@@ -39,10 +39,10 @@ const initialState =
   };
   const clear = () => {
     setCurrentId(0);
-    setPostData({
+    setPostData(
      initialState
      
-    });
+    );
   };
 
   const handleSubmit = async (e) => {
@@ -50,10 +50,10 @@ const initialState =
 
     if (currentId === 0) {
       console.log(user)
-      dispatch(createPost(...postData,  name: user?.result?.name  ));
+      dispatch(createPost({...postData,  name: user?.result?.name}  ));
       clear();
     } else {
-      dispatch(updatePost(currentId, ...postData,  user?.result?.name));
+      dispatch(updatePost({currentId, ...postData,  name:user?.result?.name}));
       clear();
     }
     NotUser();
