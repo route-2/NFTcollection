@@ -6,13 +6,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { createPost, updatePost } from "../../actions/posts";
 
 const Form = ({ currentId, setCurrentId }) => {
+ 
   const [postData, setPostData] = useState({
-    creator: "",
+   
     title: "",
     message: "",
     tags: "",
     selectedFile: "",
   });
+  const user = JSON.parse(localStorage.getItem("profile"));
+   console.log(user)
   console.log(currentId);
   console.log(postData);
   const post = useSelector((state) =>
@@ -27,15 +30,18 @@ const Form = ({ currentId, setCurrentId }) => {
 
   console.log(currentId);
   console.log(postData);
-
+const initialState =
+  {
+    title: "",
+    message: "",
+    tags: "",
+    selectedFile: "",
+  };
   const clear = () => {
     setCurrentId(0);
     setPostData({
-      creator: "",
-      title: "",
-      message: "",
-      tags: "",
-      selectedFile: "",
+     initialState
+     
     });
   };
 
@@ -43,13 +49,23 @@ const Form = ({ currentId, setCurrentId }) => {
     e.preventDefault();
 
     if (currentId === 0) {
-      dispatch(createPost(postData));
+      console.log(user)
+      dispatch(createPost(...postData,  name: user?.result?.name  ));
       clear();
     } else {
-      dispatch(updatePost(currentId, postData));
+      dispatch(updatePost(currentId, ...postData,  user?.result?.name));
       clear();
     }
+    NotUser();
+    
   };
+
+  const NotUser = async (e) => {
+    if(!user){
+      alert("Please Sign In")
+    }
+  }
+
   return (
     <div spacing={4}>
       <Text margin={4} fontSize="2xl" as="b">
@@ -57,17 +73,7 @@ const Form = ({ currentId, setCurrentId }) => {
         {currentId ? "Edit a Post" : "Create a Post"}
       </Text>
       <form autoComplete="off" noValidate onSubmit={handleSubmit}>
-        <FormControl>
-          <Input
-            type="text"
-            margin={4}
-            placeholder="Creator"
-            value={postData.creator}
-            onChange={(e) =>
-              setPostData({ ...postData, creator: e.target.value })
-            }
-          />
-        </FormControl>
+        
 
         <FormControl>
           <Input

@@ -28,9 +28,7 @@ const Post = ({ post, setCurrentId }) => {
               <Heading size="md"> {post.title}</Heading>
               <Text>{post.message}</Text>
               <Text fontSize={"4xl"}>{post.title}</Text>
-              <Text color="blue.600" fontSize="2xl">
-                {post.creator}
-              </Text>
+              
               <Text color="blue.600" fontSize="2xl">
                 {moment(post.createdAt).fromNow()}
               </Text>

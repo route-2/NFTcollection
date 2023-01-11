@@ -5,8 +5,8 @@ dotenv.config();
 const auth = async (req, res, next) => {
   try {
     // check if user is rlly authorized
-    const token = req.headers.authorization.split(" ")[1]; // token
-    console.log(req.headers.authorization)
+    const token = req.headers.Authorization.split(" ")[1]; // token
+    console.log(req.headers.Authorization)
     const isCustomAuth = token.length < 500; // if token is less than 500 characters, it's a custom auth
     // otherwise its google auth
     let decodedData;
