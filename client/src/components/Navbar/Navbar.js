@@ -5,6 +5,7 @@ import NextLink from "next/link";
 import { Link } from "@chakra-ui/react";
 import { useState,useEffect } from "react";
 import { useLocation } from "react-router-dom";
+import decode from "jwt-decode";
 
 import Auth from "../Auth/Auth";
 
@@ -20,6 +21,13 @@ const Navbar = () => {
   console.log(JSON.parse(localStorage.getItem("profile")));
   useEffect(() => {
     const token = user?.token;
+
+    // JWT ...
+    if( token ) {
+      const decodedToken = decode(token);
+      console.log(decodedToken);
+      if( decodedToken.exp * 1000 < new Date().getTime() ) handleLogout();
+    }
     setUser(JSON.parse(localStorage.getItem("profile")));
 
   }, [location]);

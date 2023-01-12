@@ -1,4 +1,5 @@
 import React from "react";
+
 import moment from "moment";
 import {
   Card,
@@ -16,51 +17,39 @@ import {
 } from "@chakra-ui/react";
 import { deletePost, likePost } from "../../../actions/posts";
 import { useDispatch } from "react-redux";
+import Posts from "../Posts";
 const Post = ({ post, setCurrentId }) => {
+  const user = JSON.parse(localStorage.getItem("profile"));
+  const Likes = () => {
+    console.log(post.likes.length)
+    if (post.likes.length > 0) {
+      return post.likes.find(
+        (like) => like === (user?.result?.googleId || user?.result?._id)
+      ) ? (
+        <>
+          {" "}
+          <Text  fontSize="2xl" as="i"  textAlign="center">
+            {post.likes.length > 2
+              ? `You and ${post.likes.length - 1} others`
+              : `${post.likes.length} like${post.likes.length > 1 ? "s" : ""}`}
+          </Text>
+        </>
+      ) : (
+        <Text fontSize="2xl" as="i" textAlign="center">
+          {post.likes.length} {post.likes.length === 1 ? "Like" : "Likes"}
+        </Text>
+      );
+    }
 
-// const Likes = () => {
-//     if (post.likes.length > 0) {
-//       return post.likes.find((like) => like === (user?.result?.googleId || user?.result?._id))
-//         ? (
-//           <Button
-//             variant="solid"
-//             colorScheme="blue"
-//             onClick={() => dispatch(likePost(post._id))}
-//           >
-//              &nbsp;
-//              {post.likes.length > 2 ? `You and ${post.likes.length - 1} others` : `${post.likes.length} like${post.likes.length > 1 ? 's' : ''}` }
-//           </Button>
-//         ) : (
-//           <Button
-//             variant="solid"
-//             colorScheme="blue"
-//             onClick={() => dispatch(likePost(post._id))}
-//           >
-//             &nbsp;
-//             {post.likes.length} {post.likes.length === 1 ? 'Like' : 'Likes'}
-          
-//           </Button>
-//         );
-//     }
-
-//     return (
-//       <Button
-//         variant="solid"
-//         colorScheme="blue"
-//         onClick={() => dispatch(likePost(post._id))}
-//       >
-//         Like &nbsp;
-//         {post.likeCount}
-//       </Button>
-//     );
-//   }
-// }
-
-
+    return <Text fontSize="2xl" as="i" textAlign="center">Like</Text>;
+  };
 
   const dispatch = useDispatch();
   return (
     <>
+
+    {user?.result?.googleId  || user?.result?._id  ? ( 
+     
       <Grid>
         <Card maxW="sm">
           <CardBody>
@@ -69,10 +58,13 @@ const Post = ({ post, setCurrentId }) => {
               <Heading size="md"> {post.title}</Heading>
               <Text>{post.message}</Text>
               <Text fontSize={"4xl"}>{post.title}</Text>
-              
+
               <Text color="blue.600" fontSize="2xl">
                 {moment(post.createdAt).fromNow()}
               </Text>
+              {(user?.result?.googleId === post?.creator || user?.result?._id === post?.creator) && (
+
+              
               <Button
                 variant="solid"
                 colorScheme="blue"
@@ -80,6 +72,7 @@ const Post = ({ post, setCurrentId }) => {
               >
                 ....
               </Button>
+              )}
             </Stack>
           </CardBody>
           <Stack mt="6" ml="4" spacing="1">
@@ -93,19 +86,31 @@ const Post = ({ post, setCurrentId }) => {
                 colorScheme="blue"
                 onClick={() => dispatch(likePost(post._id))}
               >
-               Likes
+                {Likes()}
               </Button>
+           
+
+
+              {(user?.result?.googleId === post?.creator || user?.result?._id === post?.creator) && (
               <Button
                 variant="solid"
-                colorScheme="blue"
+                colorScheme="red"
                 onClick={() => dispatch(deletePost(post._id))}
+
               >
                 Delete
               </Button>
+              )}
+
             </ButtonGroup>
           </CardFooter>
         </Card>
       </Grid>
+      ) : ( 
+        <>
+        Sign in to see posts 
+        </>
+        )}
     </>
   );
 };
