@@ -4,6 +4,7 @@ const reducer = (posts = [], action) => {
       return posts.filter((post) => post._id !== action.payload); // keeps all posts except the ones where the id == action.payload
     
       case "UPDATE":
+        return posts.map((post) => (post._id === action.payload._id ? action.payload : post))
       case "LIKE":
       return posts.map((post) =>
         post._id === action.payload._id ? action.payload : post

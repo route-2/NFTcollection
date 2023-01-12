@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Text, FormControl, Box, Button, Input } from "@chakra-ui/react";
 import { useState } from "react";
-import FileBase from "react-file-base64";
+import FileBase from 'react-file-base64';
 import { useDispatch, useSelector } from "react-redux";
 import { createPost, updatePost } from "../../actions/posts";
 
@@ -56,15 +56,14 @@ const initialState =
       dispatch(updatePost({currentId, ...postData,  name:user?.result?.name}));
       clear();
     }
-    NotUser();
+    if(!user?.result?.name){
+      alert("Please Sign In")
+    }
     
   };
 
-  const NotUser = async (e) => {
-    if(!user){
-      alert("Please Sign In")
-    }
-  }
+ 
+  
 
   return (
     <div spacing={4}>

@@ -17,6 +17,47 @@ import {
 import { deletePost, likePost } from "../../../actions/posts";
 import { useDispatch } from "react-redux";
 const Post = ({ post, setCurrentId }) => {
+
+// const Likes = () => {
+//     if (post.likes.length > 0) {
+//       return post.likes.find((like) => like === (user?.result?.googleId || user?.result?._id))
+//         ? (
+//           <Button
+//             variant="solid"
+//             colorScheme="blue"
+//             onClick={() => dispatch(likePost(post._id))}
+//           >
+//              &nbsp;
+//              {post.likes.length > 2 ? `You and ${post.likes.length - 1} others` : `${post.likes.length} like${post.likes.length > 1 ? 's' : ''}` }
+//           </Button>
+//         ) : (
+//           <Button
+//             variant="solid"
+//             colorScheme="blue"
+//             onClick={() => dispatch(likePost(post._id))}
+//           >
+//             &nbsp;
+//             {post.likes.length} {post.likes.length === 1 ? 'Like' : 'Likes'}
+          
+//           </Button>
+//         );
+//     }
+
+//     return (
+//       <Button
+//         variant="solid"
+//         colorScheme="blue"
+//         onClick={() => dispatch(likePost(post._id))}
+//       >
+//         Like &nbsp;
+//         {post.likeCount}
+//       </Button>
+//     );
+//   }
+// }
+
+
+
   const dispatch = useDispatch();
   return (
     <>
@@ -52,8 +93,7 @@ const Post = ({ post, setCurrentId }) => {
                 colorScheme="blue"
                 onClick={() => dispatch(likePost(post._id))}
               >
-                Like &nbsp;
-                {post.likeCount}
+               Likes
               </Button>
               <Button
                 variant="solid"
