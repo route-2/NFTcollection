@@ -123,7 +123,7 @@ const initialState =
           <Button
             margin={4}
             onClick={handleSubmit}
-            colorScheme="teal"
+            colorScheme="blue"
             variant="solid"
           >
             Submit
@@ -131,7 +131,7 @@ const initialState =
           <Button
             onClick={clear}
             margin={4}
-            colorScheme="teal"
+            colorScheme="blue"
             variant="outline"
           >
             Clear

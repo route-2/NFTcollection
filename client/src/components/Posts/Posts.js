@@ -20,7 +20,7 @@ const Posts = ({ setCurrentId }) => {
           <Grid
             key={post._id}
             flex
-            p={"2"}
+            p={"1"}
             flexDirection={"row"}
             xs={12}
             sm={6}
