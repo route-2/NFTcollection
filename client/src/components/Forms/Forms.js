@@ -68,6 +68,7 @@ const initialState =
   return (
     <Box
         w="xl"
+        h={'xl'}
         rounded={'sm'}
         my={5}
         mx={[0, 5]}
@@ -75,9 +76,10 @@ const initialState =
         bg="white"
         border={'1px'}
         borderColor="black"
-        boxShadow={"gray.200"}> 
+        boxShadow='dark-lg'
+       > 
         <Center> 
-      <Text margin={4} fontSize="2xl" as="b">
+      <Text margin={8} fontSize="2xl" as="b">
         {" "}
         {currentId ? "Edit a Post" : "Create a Post"}
       </Text>
@@ -88,7 +90,7 @@ const initialState =
         <FormControl>
           <Input
             type="text"
-            margin={4}
+            margin={8}
             width="90%"
             placeholder="Title"
             value={postData.title}
@@ -101,7 +103,7 @@ const initialState =
         <FormControl>
           <Input
             type="text"
-            margin={4}
+            margin={8}
             width="90%"
             placeholder="Message"
             value={postData.message}
@@ -114,7 +116,7 @@ const initialState =
         <FormControl>
           <Input
             type="text"
-            margin={4}
+            margin={8}
             width="90%"
             placeholder="Tags"
             value={postData.tags}
@@ -125,7 +127,7 @@ const initialState =
         </FormControl>
 
         <FormControl>
-          <Box margin={4}>
+          <Box margin={8}>
             <FileBase
               type="file"
              
@@ -135,8 +137,10 @@ const initialState =
               }
             />
           </Box>
+          <Center> 
           <Button
-            margin={4}
+            margin={2}
+            
             onClick={handleSubmit}
             colorScheme="blackAlpha"
             variant="solid"
@@ -145,12 +149,13 @@ const initialState =
           </Button>
           <Button
             onClick={clear}
-            margin={4}
+            margin={2}
             colorScheme="gray.500"
             variant="outline"
           >
             Clear
           </Button>
+          </Center>
         </FormControl>
       </form>
       </Box>
