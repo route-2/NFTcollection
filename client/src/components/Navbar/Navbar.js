@@ -54,7 +54,7 @@ const Navbar = () => {
           direction={"row"}
           spacing={8}
         >
-          <Image borderRadius="full" boxSize="50px" src={pexels} alt="pexels" />
+       
           {user ? (
             <>
               <Box>

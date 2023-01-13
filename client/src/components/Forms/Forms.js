@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Text, FormControl, Box, Button, Input } from "@chakra-ui/react";
+import { Text, FormControl, Box, Button, Input, Center } from "@chakra-ui/react";
 import { useState } from "react";
 import FileBase from 'react-file-base64';
 import { useDispatch, useSelector } from "react-redux";
@@ -66,11 +66,22 @@ const initialState =
   
 
   return (
-    <div spacing={4}>
+    <Box
+        w="xl"
+        rounded={'sm'}
+        my={5}
+        mx={[0, 5]}
+        overflow={'hidden'}
+        bg="white"
+        border={'1px'}
+        borderColor="black"
+        boxShadow={"gray.200"}> 
+        <Center> 
       <Text margin={4} fontSize="2xl" as="b">
         {" "}
         {currentId ? "Edit a Post" : "Create a Post"}
       </Text>
+      </Center>
       <form autoComplete="off" noValidate onSubmit={handleSubmit}>
         
 
@@ -78,6 +89,7 @@ const initialState =
           <Input
             type="text"
             margin={4}
+            width="90%"
             placeholder="Title"
             value={postData.title}
             onChange={(e) =>
@@ -90,6 +102,7 @@ const initialState =
           <Input
             type="text"
             margin={4}
+            width="90%"
             placeholder="Message"
             value={postData.message}
             onChange={(e) =>
@@ -102,6 +115,7 @@ const initialState =
           <Input
             type="text"
             margin={4}
+            width="90%"
             placeholder="Tags"
             value={postData.tags}
             onChange={(e) =>
@@ -114,6 +128,7 @@ const initialState =
           <Box margin={4}>
             <FileBase
               type="file"
+             
               multiple={false}
               onDone={({ base64 }) =>
                 setPostData({ ...postData, selectedFile: base64 })
@@ -123,7 +138,7 @@ const initialState =
           <Button
             margin={4}
             onClick={handleSubmit}
-            colorScheme="blue"
+            colorScheme="blackAlpha"
             variant="solid"
           >
             Submit
@@ -131,14 +146,14 @@ const initialState =
           <Button
             onClick={clear}
             margin={4}
-            colorScheme="blue"
+            colorScheme="gray.500"
             variant="outline"
           >
             Clear
           </Button>
         </FormControl>
       </form>
-    </div>
+      </Box>
   );
 };
 export default Form;

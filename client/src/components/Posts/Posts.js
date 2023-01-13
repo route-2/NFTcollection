@@ -2,7 +2,7 @@ import React from "react";
 import Post from "./Post/Post";
 import { Text } from "@chakra-ui/react";
 import { useSelector } from "react-redux";
-import { Card, Grid, CardHeader, CardBody, CardFooter } from "@chakra-ui/react";
+import { Card, Grid, CardHeader, CardBody,SimpleGrid, CardFooter } from "@chakra-ui/react";
 import { useDispatch } from "react-redux";
 
 const Posts = ({ setCurrentId }) => {
@@ -15,7 +15,7 @@ const Posts = ({ setCurrentId }) => {
     </Text>
   ) : (
     <>
-      <Grid alignItems="stretch" spacing={3}>
+      <SimpleGrid columns={2} spacing={10}>
         {posts.map((post) => (
           <Grid
             key={post._id}
@@ -28,7 +28,7 @@ const Posts = ({ setCurrentId }) => {
             <Post post={post} setCurrentId={setCurrentId} />
           </Grid>
         ))}
-      </Grid>
+      </SimpleGrid>
     </>
   );
 };

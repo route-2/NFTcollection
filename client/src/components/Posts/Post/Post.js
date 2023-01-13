@@ -58,7 +58,8 @@ const color = useColorModeValue('6px 6px 0 black', '6px 6px 0 cyan');
 
     {user?.result?.googleId  || user?.result?._id  ? ( 
      
-      <>  <Center py={6}>
+      <div >
+       <Center py={6}>
       <Box
         w="xs"
         rounded={'sm'}
@@ -162,7 +163,7 @@ const color = useColorModeValue('6px 6px 0 black', '6px 6px 0 cyan');
           </Flex>
         </HStack>
       </Box>
-    </Center> </>
+    </Center> </div>
 
       ) : ( 
         <>
