@@ -68,7 +68,7 @@ const initialState =
 
   return (
     <Box
-        w="xl"
+        w="100%"
         h={'xl'}
         rounded={'sm'}
         my={5}
@@ -92,7 +92,7 @@ const initialState =
           <Input
             type="text"
             margin={8}
-            width="90%"
+            width="100%"
             placeholder="Title"
             value={postData.title}
             onChange={(e) =>

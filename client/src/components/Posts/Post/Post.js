@@ -59,11 +59,11 @@ const color = useColorModeValue('6px 6px 0 black', '6px 6px 0 cyan');
     {user?.result?.googleId  || user?.result?._id  ? ( 
      
       <div >
-       <Center py={6}>
+       <Center >
       <Box
         w="xs"
         rounded={'sm'}
-        my={5}
+       
         mx={[0, 5]}
         overflow={'hidden'}
         bg="white"

@@ -15,12 +15,13 @@ const Posts = ({ setCurrentId }) => {
     </Text>
   ) : (
     <>
-      <SimpleGrid columns={2} spacing={10}>
+      <SimpleGrid  columns={[6, null, 3]} spacing='340px'>
         {posts.map((post) => (
           <Grid
             key={post._id}
             flex
             p={"1"}
+           
             flexDirection={"row"}
             xs={12}
             sm={6}

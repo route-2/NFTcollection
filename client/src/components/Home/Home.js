@@ -17,18 +17,18 @@ const Home = () => {
   }, [currentId, dispatch]);
 
   return (
-    <Box m={6}>
+    <Box m={2}>
       <Grid
         templateColumns="repeat(5, 1fr)"
         justifyContent="space-between"
         align="stretch"
-        gap={4}
+       
       >
         <GridItem colSpan={2} h="10">
           {" "}
           <Posts setCurrentId={setCurrentId} />{" "}
         </GridItem>
-        <GridItem colStart={4} colEnd={6} h="10">
+        <GridItem colStart={8} colEnd={8} h="10">
           {" "}
           <Form currentId={currentId} setCurrentId={setCurrentId} />{" "}
         </GridItem>
