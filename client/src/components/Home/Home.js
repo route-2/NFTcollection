@@ -7,7 +7,7 @@ import { useState, useEffect } from "react";
 
 import { useDispatch } from "react-redux";
 import { getPosts } from "../../actions/posts";
-
+import Pagination from "../Pagination"
 const Home = () => {
   const [currentId, setCurrentId] = useState(0);
   const dispatch = useDispatch();
@@ -31,6 +31,15 @@ const Home = () => {
         <GridItem colStart={8} colEnd={8} h="10">
           {" "}
           <Form currentId={currentId} setCurrentId={setCurrentId} />{" "}
+            <div>
+              <Pagination />
+
+
+
+
+
+
+            </div>
         </GridItem>
       </Grid>
     </Box>

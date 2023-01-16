@@ -9,6 +9,7 @@ import useStyles from "./styles";
 import * as actionType from "../../constants/actionTypes";
 
 
+
 const Paginate = () => {
     return (
         <>
@@ -26,3 +27,4 @@ const Paginate = () => {
         </>
     )
 }
+export default Paginate
