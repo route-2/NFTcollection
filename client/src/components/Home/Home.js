@@ -7,7 +7,7 @@ import { useState, useEffect } from "react";
 
 import { useDispatch } from "react-redux";
 import { getPosts } from "../../actions/posts";
-import Pagination from "../Pagination"
+
 const Home = () => {
   const [currentId, setCurrentId] = useState(0);
   const dispatch = useDispatch();
@@ -32,7 +32,7 @@ const Home = () => {
           {" "}
           <Form currentId={currentId} setCurrentId={setCurrentId} />{" "}
             <div>
-              <Pagination />
+            
 
 
 
