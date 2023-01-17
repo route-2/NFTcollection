@@ -1,30 +1,25 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { useHistory, useLocation } from "react-router-dom";
-import decode from "jwt-decode";
-import { AppBar, Avatar, Button, Toolbar, Typography } from "@material-ui/core";
-import memories from "../../images/memories.png";
-import useStyles from "./styles";
-import * as actionType from "../../constants/actionTypes";
+import React from 'react';
 
+const Pagination = ({ postsPerPage, totalPosts, paginate }) => {
+  const pageNumbers = [];
 
+  for (let i = 1; i <= Math.ceil(totalPosts / postsPerPage); i++) {
+    pageNumbers.push(i);
+  }
 
-const Paginate = () => {
-    return (
-        <>
-            <Pagination
-                count={numberOfPages}
-                page={page}
-                variant="outlined"
-                color="primary"
-                onChange={(e) => setPage(e.target.textContent)}
-                renderItem={renderItem}
-                
+  return (
+    <nav>
+      <ul className='pagination'>
+        {pageNumbers.map(number => (
+          <li key={number} className='page-item'>
+            <a onClick={() => paginate(number)} href='!#' className='page-link'>
+              {number}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  );
+};
 
-
-            />
-        </>
-    )
-}
-export default Paginate
+export default Pagination;
