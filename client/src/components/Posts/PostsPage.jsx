@@ -13,7 +13,7 @@ const PostsPage = () => {
  
   const [loading, setLoading] = useState(false);
  
-const [post,posts, isLoading] = useSelector((state) => state.posts);
+const [post,posts] = useSelector((state) => state.posts);
 const dispatch = useDispatch();
 const navigate = useNavigate();
 const { id } = useParams();
@@ -36,7 +36,7 @@ useEffect(() => {
 
 if(!post) return 'Loading...';
 const recommendedPosts = Object.values(posts).filter(({ _id }) => _id !== post._id);
-
+console.log(recommendedPosts)
 
 
 
@@ -73,7 +73,7 @@ const recommendedPosts = Object.values(posts).filter(({ _id }) => _id !== post._
   </Stack>
 </Card>
 
-{!! recommendedPosts.length && ( 
+{ recommendedPosts.length && ( 
   <Stack>
     <Heading size='md'>You might also like:</Heading>
     <Stack direction={{ base: 'column', md: 'row' }} spacing='4'>
@@ -98,6 +98,8 @@ const recommendedPosts = Object.values(posts).filter(({ _id }) => _id !== post._
               <Text py='2'>
               {message}
               </Text>
+              <Text> 
+              {title}</Text>
             </CardBody>
 
             <CardFooter>
