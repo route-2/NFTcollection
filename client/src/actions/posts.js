@@ -3,6 +3,14 @@ import { FETCH_ALL, UPDATE, DELETE, LIKE } from "../constants/actionTypes";
 import CREATE from "../constants/actionTypes";
 
 // Action Creators
+export const getPost = (id) => async (dispatch) => {
+  try {
+    const { data } = await api.fetchPost();
+    dispatch({ type: "FETCH_POST", payload: data });
+  } catch (error) {
+    console.log(error.message);
+  }
+};
 export const getPosts = () => async (dispatch) => {
   try {
     const { data } = await api.fetchPosts();

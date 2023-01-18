@@ -29,8 +29,10 @@ import { useDispatch } from "react-redux";
 import { useState } from "react";
 import NextLink from 'next/link'
 import { Link } from '@chakra-ui/react'
+import { useNavigate } from "react-router-dom";
 import Posts from "../Posts";
 const Post = ({ post, setCurrentId }) => {
+  const navigate = useNavigate();
   const [liked, setLiked] = useState(false);
   const user = JSON.parse(localStorage.getItem("profile"));
   const Likes = () => {
@@ -56,17 +58,20 @@ const Post = ({ post, setCurrentId }) => {
   };
 const color = useColorModeValue('6px 6px 0 black', '6px 6px 0 cyan');
   const dispatch = useDispatch();
+  const openPost = () => {
+   navigate(`/posts/${post._id}`)
+  };
   return (
     <>
 
     {user?.result?.googleId  || user?.result?._id  ? ( 
-     <Link as={NextLink} href='/PostsPage'>
+     
       <div  >
        <Center >
       <Box
         w="xs"
         rounded={'sm'}
-       
+        onClick={openPost}
         mx={[0, 5]}
         overflow={'hidden'}
         bg="white"
@@ -167,7 +172,7 @@ const color = useColorModeValue('6px 6px 0 black', '6px 6px 0 cyan');
         </HStack>
       </Box>
     </Center> </div>
-    </Link>
+    
 
       ) : ( 
         <>

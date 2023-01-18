@@ -3,27 +3,45 @@ import { Card,Stack,Button,Image,Text,Heading, CardHeader, CardBody, CardFooter 
 import { useEffect,useState } from 'react';
 import {useSelector} from 'react-redux'
 import Post from "./Post/Post"
+import { useNavigate,useParams } from 'react-router-dom';
+import { getPost,getPostsBySearch } from '../../actions/posts';
+import { useDispatch } from 'react-redux';
 
 import axios
  from 'axios';
-const PostsPage = (post) => {
-  const [posts, setPosts] = useState([]);
+const PostsPage = () => {
+ 
   const [loading, setLoading] = useState(false);
  
-  const postS = useSelector((state) => state.posts);
-  console.log(postS)
-
+const [post,posts, isLoading] = useSelector((state) => state.posts);
+const dispatch = useDispatch();
+const navigate = useNavigate();
+const { id } = useParams();
+  console.log(post)
+  console.log(posts)
   useEffect(() => {
-    const fetchPosts = async () => {
-      setLoading(true);
-      const res = await axios.get("https://jsonplaceholder.typicode.com/posts");
-      setPosts(res.data);
-      setLoading(false);
-    };
+    dispatch(getPost(id));
 
-    fetchPosts();
-  }, []);
+    
+  }, [id]);
 
+
+
+
+useEffect(() => {
+  if (post) {
+    dispatch(getPostsBySearch({ search: 'none', tags: post?.tags.join(',') }));
+  }
+}, [post]);
+
+if(!post) return 'Loading...';
+const recommendedPosts = Object.values(posts).filter(({ _id }) => _id !== post._id);
+
+
+
+
+
+ 
 
     return (
         <>
@@ -42,21 +60,58 @@ const PostsPage = (post) => {
 
   <Stack>
     <CardBody>
-      <Heading size='md'>The perfect latte</Heading>
+      <Heading size='md'> {post.title}</Heading>
 
       <Text py='2'>
-        Caffè latte is a coffee beverage of Italian origin made with espresso
-        and steamed milk.
+      {post.message}
       </Text>
     </CardBody>
 
     <CardFooter>
-      <Button variant='solid' colorScheme='blue'>
-        Buy Latte
-      </Button>
+      <Text> Comment soon ..</Text>
     </CardFooter>
   </Stack>
 </Card>
+
+{!! recommendedPosts.length && ( 
+  <Stack>
+    <Heading size='md'>You might also like:</Heading>
+    <Stack direction={{ base: 'column', md: 'row' }} spacing='4'>
+      {recommendedPosts.map(({ title, name, message, likes, selectedFile, _id }) => (
+        <Card
+          key={_id}
+          direction={{ base: 'column', sm: 'row' }}
+          overflow='hidden'
+          variant='outline'
+        >
+          <Image
+            objectFit='cover'
+            maxW={{ base: '100%', sm: '200px' }}
+            src={selectedFile}
+            alt='image'
+          />
+
+          <Stack>
+            <CardBody>
+              <Heading size='md'>{title}</Heading>
+
+              <Text py='2'>
+              {message}
+              </Text>
+            </CardBody>
+
+            <CardFooter>
+              <Text> Comment soon ..</Text>
+
+            </CardFooter>
+          </Stack>
+        </Card>
+      ))}
+    </Stack>
+  </Stack>
+)}
+
+          
         </>
     )
 
