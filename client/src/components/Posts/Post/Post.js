@@ -20,12 +20,15 @@ import {
   useColorModeValue,
   HStack,
   Box,
+  
 } from "@chakra-ui/react";
 import { deletePost, likePost } from "../../../actions/posts";
 import { BsArrowUpRight, BsHeartFill, BsHeart } from 'react-icons/bs';
 import { DeleteIcon } from "@chakra-ui/icons";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
+import NextLink from 'next/link'
+import { Link } from '@chakra-ui/react'
 import Posts from "../Posts";
 const Post = ({ post, setCurrentId }) => {
   const [liked, setLiked] = useState(false);
@@ -57,8 +60,8 @@ const color = useColorModeValue('6px 6px 0 black', '6px 6px 0 cyan');
     <>
 
     {user?.result?.googleId  || user?.result?._id  ? ( 
-     
-      <div >
+     <Link as={NextLink} href='/pagination'>
+      <div  >
        <Center >
       <Box
         w="xs"
@@ -164,6 +167,7 @@ const color = useColorModeValue('6px 6px 0 black', '6px 6px 0 cyan');
         </HStack>
       </Box>
     </Center> </div>
+    </Link>
 
       ) : ( 
         <>

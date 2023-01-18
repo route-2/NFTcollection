@@ -7,17 +7,18 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./components/Home/Home";
 import Auth from "./components/Auth/Auth";
 import SignUp from "./components/Auth/SignUp";
+import PostsPage from "./components/Posts/PostsPage";
 
 const App = () => {
   return (
     <Box w="100%" p={4}>
-      
       <BrowserRouter>
-      <Navbar />
+        <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/auth" element={<Auth />} />
           <Route path="/signup" element={<SignUp />} />
+          <Route path="/PostsPage" element={<PostsPage />} />
         </Routes>
       </BrowserRouter>
     </Box>
