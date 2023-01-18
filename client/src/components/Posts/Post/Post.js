@@ -60,7 +60,7 @@ const color = useColorModeValue('6px 6px 0 black', '6px 6px 0 cyan');
     <>
 
     {user?.result?.googleId  || user?.result?._id  ? ( 
-     <Link as={NextLink} href='/pagination'>
+     <Link as={NextLink} href='/PostsPage'>
       <div  >
        <Center >
       <Box

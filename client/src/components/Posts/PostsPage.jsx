@@ -2,10 +2,11 @@ import React from 'react';
 import { Card,Stack,Button,Image,Text,Heading, CardHeader, CardBody, CardFooter } from '@chakra-ui/react'
 import { useEffect,useState } from 'react';
 import {useSelector} from 'react-redux'
+import Post from "./Post/Post"
 
 import axios
  from 'axios';
-const PostsPage = ({post, setCurrentId}) => {
+const PostsPage = (post) => {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(false);
  
@@ -35,7 +36,7 @@ const PostsPage = ({post, setCurrentId}) => {
   <Image
     objectFit='cover'
     maxW={{ base: '100%', sm: '200px' }}
-    src=""
+    src={post.selectedFile}
     alt='Caffe Latte'
   />
 
