@@ -1,14 +1,17 @@
 import React from "react";
-import { Box, Grid, Text, Button, GridItem,Input,InputRightElement,InputGroup,InputRightAddon, Image } from "@chakra-ui/react";
+import { Box, Grid,Container, Heading, Text, Button, GridItem,Input,InputRightElement,InputGroup,InputRightAddon, Image } from "@chakra-ui/react";
 import Pagination from "../Posts/Pagination";
 import Posts from "../Posts/Posts";
 import Form from "../Forms/Forms";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useDispatch } from "react-redux";
-import { getPosts } from "../../actions/posts";
+import { getPosts, getPostsBySearch } from "../../actions/posts";
 import {Search2Icon} from "@chakra-ui/icons"
-import { useLocation } from "react-router-dom";
+import { Navigate, useLocation } from "react-router-dom";
+import { EmailChipInput } from "../ChipInput/ChipInput";
+import { useNavigate } from "react-router-dom";
+
 
 function useQuery() {
   return new URLSearchParams(useLocation().search);
@@ -24,7 +27,16 @@ const Home = () => {
   const query = useQuery();
   const[tags,setTags]=useState([]);
   const searchQuery = query.get('searchQuery');
-  
+  const tagsQuery = query.get('tags');
+const navigate = useNavigate();
+  const searchPost = () => {
+    if (search.trim()) {
+      dispatch(getPostsBySearch({ search,tags: tags.join(',') }));
+        navigate(`/posts/search?searchQuery=${search || 'none'} &tags=${tags.join(',')}`);
+    } else {
+      dispatch(getPosts());
+    }
+  }
 
   useEffect(() => {
     dispatch(getPosts());
@@ -43,10 +55,10 @@ const Home = () => {
 
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
-  const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
+ 
 
   const paginate = pageNumber => setCurrentPage(pageNumber);
-
+  
 
 const handlekeyPress = (e) => {
     const { name, value } = e.target;
@@ -56,6 +68,7 @@ const handlekeyPress = (e) => {
 
   const handleDeleteChip = (chipToDelete) => setTags(tags.filter((tag) => tag !== chipToDelete));
  
+  
   return (
     <Box m={2}>
       <Grid
@@ -72,21 +85,34 @@ const handlekeyPress = (e) => {
         <div>
 
         <Box>
-        <Text variant="h6" align="center"
-        name="search"   
-        value={search}           
-         label="search posts"
-         onChange={(e) => setSearch(e.target.value)}>
-
         
-        
-        
-        </Text>
-        <InputGroup size='sm'>
+        <InputGroup marginTop="2" size='sm'>
    
-    <Input placeholder=' Search ' onAdd={handleAddChip}  onDelete={handleDeleteChip} value={tags} />
-    <InputRightElement children= {<Search2Icon color='gray.300'/>} />
-  </InputGroup>
+   <Input  variant="h6"  name="search"   
+        value={search}  
+        placeholder=' Search Posts '         
+        onKeyPress={handlekeyPress}
+         onChange={(e) => setSearch(e.target.value)} />
+   <InputRightElement  children= {<Search2Icon color='gray.300'/>} />
+ </InputGroup>
+ <Container>
+        
+
+
+        <EmailChipInput 
+          value={tags}
+          onAdd={handleAddChip}
+          onDelete={handleDeleteChip}
+
+
+
+
+        />
+      </Container>
+
+      <Button colorScheme="teal" variant="outline" size="sm" onClick={searchPost}>Search</Button>
+
+  
 
         
         
