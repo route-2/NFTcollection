@@ -6,7 +6,7 @@ import { commentPost } from '../../actions/posts';
 
 const Comments = ({post}) => {
 
-    const[comments,setComments] = useState([1,2,3,4]);
+    const[comments,setComments] = useState(post?.comments);
     const [comment,setComment] = useState('');
     const user = JSON.parse(localStorage.getItem('profile'));
     const commentsRef = useRef();
@@ -32,9 +32,9 @@ const Comments = ({post}) => {
                 <div className="commentsInnerContainer">
                     <h4>Comments</h4>
                     <div ref={commentsRef} className="commentsList">
-                        {comments.map((c,i) => (
+                        {comments?.map((c,i) => (
                             <div key={i}>
-                                <p>{i}</p>
+                                <p>{c}</p>
                             </div>
                         ))}
                     </div>

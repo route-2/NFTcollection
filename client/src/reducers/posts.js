@@ -21,7 +21,7 @@ const reducer = (posts = [], action) => {
         return {
           ...posts,
           posts: posts.posts.map((post) => {
-            if (post._id == +action.payload._id) {
+            if (post._id == +action.payload._id) { // return posts which recieved a comment
               return action.payload;
             }
             return post;
