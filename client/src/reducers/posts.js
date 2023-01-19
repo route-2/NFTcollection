@@ -1,4 +1,4 @@
-import { StatusError } from "@hashgraph/sdk";
+
 
 const reducer = (posts = [], action) => {
   switch (action.type) {
