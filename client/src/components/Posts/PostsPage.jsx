@@ -7,13 +7,14 @@ import { useNavigate,useParams } from 'react-router-dom';
 import { getPost,getPostsBySearch,getPosts } from '../../actions/posts';
 import { useDispatch } from 'react-redux';
 import { fetchPostsBySearch } from '../../api';
+import Comments from './Comments';
 
 import axios
  from 'axios';
 const PostsPage = () => {
  
   const [loading, setLoading] = useState(false);
- 
+ const postS = useSelector((state) => state.posts);
 const[post,setPost] = useState([]);
 const[recommendedPosts,setRecommendedPosts] = useState([]);
 
@@ -76,7 +77,7 @@ useEffect(() => {
     </CardBody>
 
     <CardFooter>
-      <Text> Comment soon ..</Text>
+     <Comments/>
     </CardFooter>
   </Stack>
 </Card>
@@ -109,7 +110,7 @@ useEffect(() => {
             </CardBody>
 
             <CardFooter>
-              <Text> Comment soon ..</Text>
+              <Comments post={postS}/>
 
             </CardFooter>
           </Stack>

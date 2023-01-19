@@ -17,7 +17,8 @@ const reducer = (posts = [], action) => {
       return {...posts, post: action.payload}
     case "FETCH_ALL":
       return action.payload;
-
+     case "FETCH_COMMENTS":
+      return {...posts, comments: action.payload}
     case "CREATE":
       return [...posts, action.payload];
     default:
