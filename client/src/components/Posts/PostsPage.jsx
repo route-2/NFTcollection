@@ -77,7 +77,7 @@ useEffect(() => {
     </CardBody>
 
     <CardFooter>
-     <Comments/>
+     <Comments post={post}/>
     </CardFooter>
   </Stack>
 </Card>
@@ -110,7 +110,7 @@ useEffect(() => {
             </CardBody>
 
             <CardFooter>
-              <Comments post={postS}/>
+              <Comments post={post}/>
 
             </CardFooter>
           </Stack>

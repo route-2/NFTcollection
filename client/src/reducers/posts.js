@@ -17,8 +17,16 @@ const reducer = (posts = [], action) => {
       return {...posts, post: action.payload}
     case "FETCH_ALL":
       return action.payload;
-     case "FETCH_COMMENTS":
-      return {...posts, comments: action.payload}
+      case "COMMENT":
+        return {
+          ...posts,
+          posts: posts.posts.map((post) => {
+            if (post._id == +action.payload._id) {
+              return action.payload;
+            }
+            return post;
+          }),
+        };
     case "CREATE":
       return [...posts, action.payload];
     default:

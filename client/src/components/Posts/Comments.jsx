@@ -12,11 +12,13 @@ const Comments = ({post}) => {
     const commentsRef = useRef();
     const dispatch = useDispatch();
     
-
-    const handleClick = async (e) => {
-        e.preventDefault();
+      console.log(post)
+    const handleClick = async () => {
+        
         const finalComment = `${user.result.name}: ${comment}`;
+        console.log(post)
         dispatch(commentPost(finalComment,post._id));
+       
         setComments([...comments,finalComment]);
         setComment('');
         commentsRef.current.scrollIntoView({behavior:'smooth'});
