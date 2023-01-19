@@ -32,10 +32,14 @@ const Comments = ({post}) => {
                 <div className="commentsInnerContainer">
                     <h4>Comments</h4>
                     <div ref={commentsRef} className="commentsList">
+                        
                         {comments?.map((c,i) => (
-                            <div key={i}>
-                                <p>{c}</p>
-                            </div>
+                            <>
+
+                           
+                            <strong>{c.split(': ')[0]}</strong>
+              {c.split(':')[1]}
+              </>
                         ))}
                     </div>
                     {user?.result?.name && ( 
