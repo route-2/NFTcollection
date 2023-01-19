@@ -4,8 +4,9 @@ import { useEffect,useState } from 'react';
 import {useSelector} from 'react-redux'
 import Post from "./Post/Post"
 import { useNavigate,useParams } from 'react-router-dom';
-import { getPost,getPostsBySearch } from '../../actions/posts';
+import { getPost,getPostsBySearch,getPosts } from '../../actions/posts';
 import { useDispatch } from 'react-redux';
+import { fetchPostsBySearch } from '../../api';
 
 import axios
  from 'axios';
@@ -13,35 +14,42 @@ const PostsPage = () => {
  
   const [loading, setLoading] = useState(false);
  
-const [post,posts] = useSelector((state) => state.posts);
+const[post,setPost] = useState([]);
+const[recommendedPosts,setRecommendedPosts] = useState([]);
+
 const dispatch = useDispatch();
 const navigate = useNavigate();
 const { id } = useParams();
-  console.log(post)
-  console.log(posts)
+  //console.log(post)
+  // console.log(posts)
   useEffect(() => {
-    dispatch(getPost(id));
+    
+    const fetchData = async () => {
+      const { data } = await axios.get(`http://localhost:5000/posts/${id}`);
+      // const {res} = getPostsBySearch({ search: 'none', tags: data?.tags.join(',') });
+      // console.log(res);
+      setPost(data);
+    }
 
+    fetchData();
     
   }, [id]);
 
-
+  
 
 
 useEffect(() => {
-  if (post) {
-    dispatch(getPostsBySearch({ search: 'none', tags: post?.tags.join(',') }));
-  }
-}, [post]);
 
-if(!post) return 'Loading...';
-const recommendedPosts = Object.values(posts).filter(({ _id }) => _id !== post._id);
-console.log(recommendedPosts)
-
-
-
-
- 
+  const getRecommends = async () => {
+    if (post) {
+      const tag = (post?.tags?.join(','));
+      const data  = await axios.get(`http://localhost:5000/posts/search?searchQuery=none&tags=${tag}`);
+      setRecommendedPosts(data?.data?.data);
+    }
+    }
+      getRecommends();
+      console.log(recommendedPosts)
+  }, [post]);
 
     return (
         <>
@@ -60,7 +68,7 @@ console.log(recommendedPosts)
 
   <Stack>
     <CardBody>
-      <Heading size='md'> {post.title}</Heading>
+      <Heading size='md'></Heading>
 
       <Text py='2'>
       {post.message}
@@ -73,11 +81,11 @@ console.log(recommendedPosts)
   </Stack>
 </Card>
 
-{ recommendedPosts.length && ( 
+  { recommendedPosts ? ( 
   <Stack>
     <Heading size='md'>You might also like:</Heading>
     <Stack direction={{ base: 'column', md: 'row' }} spacing='4'>
-      {recommendedPosts.map(({ title, name, message, likes, selectedFile, _id }) => (
+    {recommendedPosts.map(({ title, name, message, likes, selectedFile, _id }) => (
         <Card
           key={_id}
           direction={{ base: 'column', sm: 'row' }}
@@ -98,8 +106,6 @@ console.log(recommendedPosts)
               <Text py='2'>
               {message}
               </Text>
-              <Text> 
-              {title}</Text>
             </CardBody>
 
             <CardFooter>
@@ -111,7 +117,7 @@ console.log(recommendedPosts)
       ))}
     </Stack>
   </Stack>
-)}
+):null}
 
           
         </>
