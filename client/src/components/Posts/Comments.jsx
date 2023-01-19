@@ -1,4 +1,4 @@
-import React , {useState, useRef} from 'react';
+import React , {useState,useEffect, useRef} from 'react';
 import {  useDispatch } from 'react-redux';
 import { commentPost } from '../../actions/posts';
 
@@ -6,11 +6,14 @@ import { commentPost } from '../../actions/posts';
 
 const Comments = ({post}) => {
 
-    const[comments,setComments] = useState(post?.comments);
+    const[comments,setComments] = useState([]);
     const [comment,setComment] = useState('');
     const user = JSON.parse(localStorage.getItem('profile'));
     const commentsRef = useRef();
     const dispatch = useDispatch();
+    useEffect(() => {
+        setComments(post?.comments);
+    },[post])
     
       console.log(post)
     const handleClick = async () => {
@@ -26,6 +29,9 @@ const Comments = ({post}) => {
       
     }
 
+   
+
+
     return (
         <>
             <div className="commentsOuterContainer">
@@ -38,7 +44,7 @@ const Comments = ({post}) => {
 
                            
                             <strong>{c.split(': ')[0]}</strong>
-              {c.split(':')[1]}
+              {c.split(':')[1]} <br/> 
               </>
                         ))}
                     </div>
